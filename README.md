@@ -66,7 +66,7 @@ To get a local copy up and running follow these simple example steps.
    ```sh
    npm run dev
    ```
-4. Path => http://127.0.0.4:3200/
+4. Path => http://localhost:3200/
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
