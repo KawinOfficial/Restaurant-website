@@ -41,16 +41,9 @@
 * [Chakra-UI](https://chakra-ui.com/)
 
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 <!-- GETTING STARTED -->
 ## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
 
 ### Installation
 
@@ -68,14 +61,13 @@ To get a local copy up and running follow these simple example steps.
    ```
 4. Path => http://localhost:3200/
 
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - kawin.sris@gmail.com
+Kawin Srisomphan - kawin.sris@gmail.com
 
 Project Link: [https://github.com/KawinOfficial](https://github.com/KawinOfficial)
 
