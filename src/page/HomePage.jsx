@@ -62,6 +62,7 @@ export default function HomePage() {
         display={{ base: "", md: "flex" }}
         alignItems="center"
         justifyContent="space-between"
+        px={{ md: 8 }}
       >
         <Text fontSize="2xl" fontWeight="semibold">
           Place List
@@ -69,19 +70,20 @@ export default function HomePage() {
 
         {/* Search Box */}
         <Grid
-          templateColumns={{ base: "repeat(2,1fr)", md: "repeat(3,1fr)" }}
+          templateColumns={{ base: "repeat(1,1fr)", md: "repeat(3,1fr)" }}
           alignItems="center"
-          my={3}
+          my={2}
           w={{ base: "100%", md: "50%" }}
         >
-          <GridItem mr={5}>
+          <GridItem mr={5} w="100%">
             <Select
+              mb={{ base: 3, md: 0 }}
+              pr={{ base: 0, md: 3 }}
               rounded="full"
               bgColor="white"
               borderColor="#0f1e56"
               size="sm"
               color="#9e9e9e"
-              w="100%"
               onChange={(e) => handleSelect(e.target.value)}
             >
               <option value="restaurant">Restaurant</option>
@@ -90,7 +92,11 @@ export default function HomePage() {
             </Select>
           </GridItem>
 
-          <GridItem colSpan={{ md: 2 }} borderLeft="1px" pl={5}>
+          <GridItem
+            colSpan={{ md: 2 }}
+            borderLeft={{ md: "1px" }}
+            pl={{ md: 3 }}
+          >
             <InputGroup color="#9e9e9e">
               <Input
                 placeholder="Search name..."
@@ -115,12 +121,13 @@ export default function HomePage() {
       </Box>
 
       <Grid
+        px={{ md: 8 }}
         templateColumns={{
           base: "repeat(1,1fr)",
           md: "repeat(2,1fr)",
           lg: "repeat(3,1fr)",
         }}
-        gap={5}
+        gap={8}
         h={{ base: "83vh", md: "85vh" }}
         overflow="auto"
         rounded="xl"
