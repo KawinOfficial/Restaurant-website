@@ -58,87 +58,87 @@ export default function HomePage() {
 
   return (
     <>
-      <Box
-        display={{ base: "", md: "flex" }}
-        alignItems="center"
-        justifyContent="space-between"
-        px={{ md: 8 }}
-      >
-        <Text fontSize="2xl" fontWeight="semibold">
-          Place List
-        </Text>
-
-        {/* Search Box */}
-        <Grid
-          templateColumns={{ base: "repeat(1,1fr)", md: "repeat(3,1fr)" }}
+      <Box px={{ md: 5 }}>
+        <Box
+          display={{ md: "flex" }}
           alignItems="center"
-          my={2}
-          w={{ base: "100%", md: "50%" }}
+          justifyContent="space-between"
         >
-          <GridItem mr={5} w="100%">
-            <Select
-              mb={{ base: 3, md: 0 }}
-              pr={{ base: 0, md: 3 }}
-              rounded="full"
-              bgColor="white"
-              borderColor="#0f1e56"
-              size="sm"
-              color="#9e9e9e"
-              onChange={(e) => handleSelect(e.target.value)}
-            >
-              <option value="restaurant">Restaurant</option>
-              <option value="bakery">Bakery</option>
-              <option value="cafe">Cafe</option>
-            </Select>
-          </GridItem>
+          <Text fontSize="2xl" fontWeight="semibold">
+            Place List
+          </Text>
 
-          <GridItem
-            colSpan={{ md: 2 }}
-            borderLeft={{ md: "1px" }}
-            pl={{ md: 3 }}
+          <Grid
+            templateColumns={{ base: "repeat(1,1fr)", md: "repeat(3,1fr)" }}
+            alignItems="center"
+            my={2}
+            w={{ base: "100%", md: "50%" }}
           >
-            <InputGroup color="#9e9e9e">
-              <Input
-                placeholder="Search name..."
+            {/* Select */}
+            <GridItem mr={5} w="100%">
+              <Select
+                mb={{ base: 3, md: 0 }}
+                pr={{ base: 0, md: 3 }}
                 rounded="full"
                 bgColor="white"
                 borderColor="#0f1e56"
                 size="sm"
-                onChange={handleSearch}
-              />
-              <InputRightElement
-                pb={2}
-                children={
-                  <IconButton
-                    variant="link"
-                    icon={<Icon as={MdOutlineSearch} boxSize={5} />}
-                  />
-                }
-              />
-            </InputGroup>
-          </GridItem>
+                color="#9e9e9e"
+                onChange={(e) => handleSelect(e.target.value)}
+              >
+                <option value="restaurant">Restaurant</option>
+                <option value="bakery">Bakery</option>
+                <option value="cafe">Cafe</option>
+              </Select>
+            </GridItem>
+
+            {/* Search */}
+            <GridItem
+              colSpan={{ md: 2 }}
+              borderLeft={{ md: "1px" }}
+              pl={{ md: 3 }}
+            >
+              <InputGroup color="#9e9e9e">
+                <Input
+                  placeholder="Search name..."
+                  rounded="full"
+                  bgColor="white"
+                  borderColor="#0f1e56"
+                  size="sm"
+                  onChange={handleSearch}
+                />
+                <InputRightElement
+                  pb={2}
+                  children={
+                    <IconButton
+                      variant="link"
+                      icon={<Icon as={MdOutlineSearch} boxSize={5} />}
+                    />
+                  }
+                />
+              </InputGroup>
+            </GridItem>
+          </Grid>
+        </Box>
+
+        <Grid
+          templateColumns={{
+            md: "repeat(2,1fr)",
+            lg: "repeat(3,1fr)",
+          }}
+          gap={8}
+          h={{ base: "79vh", md: "87vh" }}
+          overflow="auto"
+          rounded="xl"
+          pb={3}
+        >
+          {realData.map((info) => (
+            <GridItem key={info.id}>
+              <ListBox data={info} />
+            </GridItem>
+          ))}
         </Grid>
       </Box>
-
-      <Grid
-        px={{ md: 8 }}
-        templateColumns={{
-          base: "repeat(1,1fr)",
-          md: "repeat(2,1fr)",
-          lg: "repeat(3,1fr)",
-        }}
-        gap={8}
-        h={{ base: "83vh", md: "85vh" }}
-        overflow="auto"
-        rounded="xl"
-        pb={3}
-      >
-        {realData.map((info) => (
-          <GridItem key={info.id}>
-            <ListBox data={info} />
-          </GridItem>
-        ))}
-      </Grid>
     </>
   );
 }

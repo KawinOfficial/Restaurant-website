@@ -16,34 +16,63 @@ import {
 } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
+function ButtonImg({ icon, onClick, disabled }) {
+  return (
+    <IconButton
+      rounded="full"
+      size="xs"
+      variant="solid"
+      onClick={onClick}
+      icon={<Icon as={icon} />}
+      disabled={disabled}
+    />
+  );
+}
+
 export default function ListBox({ data }) {
   const navigate = useNavigate();
   const [index, setIndex] = useState(0);
-  const showGallery = useBreakpointValue({ base: true, md: false });
+  const breakpoint = useBreakpointValue({ base: true, md: false });
+
   const { operation_time } = data;
 
   return (
     <>
       <Box
-        flexDirection="column"
         rounded="xl"
         bgColor="white"
-        shadow="md"
-        w="100%"
-        h={{ base: "40vh", md: "26vh" }}
+        shadow="lg"
+        h={{ base: "45vh", md: "27vh" }}
         p={{ md: 3 }}
-        _hover={{
-          shadow: "xl",
-        }}
-        backgroundImage={showGallery && ` url(${data.profile_image_url})`}
+        backgroundImage={breakpoint && ` url(${data.profile_image_url})`}
         backgroundSize="cover"
         onClick={() => navigate("/detail", { state: data.id })}
+        position="relative"
       >
-        {showGallery && <Box h="30%" />}
-        <Box w="100%" p={2} bgColor={showGallery && "white"} roundedBottom="xl">
+        {breakpoint && (
+          <React.Fragment>
+            <Box
+              position="absolute"
+              bgColor="#134b8a"
+              color="white"
+              w="25%"
+              py={2}
+              textAlign="center"
+              rounded="full"
+              shadow="md"
+              ml="70%"
+              mt="23%"
+            >
+              {data.rating}
+            </Box>
+            <Box h="30%" />
+          </React.Fragment>
+        )}
+
+        <Box p={2} bgColor="white" roundedBottom="xl">
           <Grid templateColumns="repeat(6,1fr)" mb={2}>
             <GridItem rowSpan={{ md: 2 }} colSpan={{ base: 6, md: 1 }} mr={3}>
-              {!showGallery && (
+              {!breakpoint && (
                 <Box boxSize="7vh">
                   <Image
                     boxSize="7vh"
@@ -57,7 +86,7 @@ export default function ListBox({ data }) {
             {/* Name */}
             <GridItem
               colSpan={5}
-              fontSize={{ base: "sm", md: "xl" }}
+              fontSize={{ base: "md", md: "xl" }}
               fontWeight="medium"
             >
               {data.name}
@@ -70,62 +99,52 @@ export default function ListBox({ data }) {
             </GridItem>
 
             {/* Rating */}
-            <GridItem
-              display="flex"
-              alignItems="center"
-              color="#134b8a"
-              fontWeight="medium"
-              justifyItems="end"
-            >
-              <Icon viewBox="0 0 200 200" mr={2}>
-                <path
-                  fill="currentColor"
-                  d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
-                />
-              </Icon>
-              {data.rating}
-            </GridItem>
+            {!breakpoint && (
+              <GridItem
+                display="flex"
+                alignItems="center"
+                color="#134b8a"
+                fontWeight="medium"
+              >
+                <Icon viewBox="0 0 200 200" mr={2}>
+                  <path
+                    fill="currentColor"
+                    d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
+                  />
+                </Icon>
+                {data.rating}
+              </GridItem>
+            )}
           </Grid>
 
           {/* Image   */}
-          {showGallery ? (
-            <React.Fragment>
-              <Center
-                display="flex"
-                alignItems="center"
-                position="relative"
-                w="100%"
-              >
-                <IconButton
-                  rounded="full"
-                  mr="100%"
-                  size="sm"
-                  onClick={() => setIndex(index - 1)}
-                  variant="ghost"
-                  icon={<Icon as={MdKeyboardArrowLeft} />}
-                  disabled={index == 0}
-                  position="absolute"
-                />
-                <Center w="73vw">
-                  <Image
-                    h="20vh"
-                    w="100%"
-                    fallbackSrc={data.images[index]}
-                    rounded="xl"
-                  />
-                </Center>
-                <IconButton
-                  rounded="full"
-                  ml="100%"
-                  size="sm"
-                  onClick={() => setIndex(index + 1)}
-                  variant="ghost"
-                  icon={<Icon as={MdKeyboardArrowRight} />}
-                  disabled={index == 2}
-                  position="absolute"
-                />
-              </Center>
-            </React.Fragment>
+          {breakpoint ? (
+            <Center
+              justifyContent="space-between"
+              backgroundImage={` url(${data.images[index]})`}
+              backgroundSize="cover"
+              rounded="xl"
+              h="24vh"
+              px={1}
+            >
+              <ButtonImg
+                icon={MdKeyboardArrowLeft}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIndex(index - 1);
+                }}
+                disabled={index == 0}
+              />
+
+              <ButtonImg
+                icon={MdKeyboardArrowRight}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIndex(index + 1);
+                }}
+                disabled={index == 2}
+              />
+            </Center>
           ) : (
             <Center>
               {data.images.map((pic, i) => (
